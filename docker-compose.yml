@@ -16,7 +16,41 @@ services:
         window: 120s
       placement:
           constraints: [node.role == manager]
-  slave:
+  slave1:
+    image: ajeetraina/apache-jmeter-server
+    tty: true
+    networks:
+      - jm-network
+    ports:
+      - "50000"
+      - "1099"
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: [node.role == worker]
+  slave2:
+    image: ajeetraina/apache-jmeter-server
+    tty: true
+    networks:
+      - jm-network
+    ports:
+      - "50000"
+      - "1099"
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints: [node.role == worker]
+  slave3:
     image: ajeetraina/apache-jmeter-server
     tty: true
     networks:
